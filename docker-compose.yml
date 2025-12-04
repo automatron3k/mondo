@@ -1,5 +1,42 @@
 version: '3.8'
 services:
+  # Backend API Server
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: mondo-api
+    working_dir: /app/backend
+    volumes:
+      - ./backend:/app/backend
+      - ./.env:/app/backend/.env:ro  # Mount .env file if it exists
+    ports:
+      - "5001:5000"
+    environment:
+      - NODE_ENV=development
+      # DATABASE_URL must be set in .env file (Supabase connection string)
+      - DATABASE_URL=${DATABASE_URL}
+      - PORT=5000
+    restart: unless-stopped
+    command: sh -c "npm install && npm run dev"
+
+  # Frontend Development Server
+  dev:
+    image: node:20-alpine
+    container_name: mondo-dev
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm run dev"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - VITE_API_URL=http://localhost:5001
+    depends_on:
+      - api
+
+  # Production Frontend
   prod:
     build: .
     image: mondo:latest
@@ -14,15 +51,3 @@ services:
       timeout: 3s
       retries: 3
       start_period: 5s
-
-  dev:
-    image: node:20-alpine
-    container_name: mondo-dev
-    working_dir: /app
-    volumes:
-      - .:/app
-    ports:
-      - "3000:3000"
-    command: sh -c "npm install && npm run dev"
-    environment:
-      - CHOKIDAR_USEPOLLING=true
