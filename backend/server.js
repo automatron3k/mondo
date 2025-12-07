@@ -1,10 +1,8 @@
+import 'dotenv/config'; // Load env vars before other imports
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import postsRouter from './routes/posts.js';
 import { query } from './db/connection.js';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,16 +17,16 @@ app.get('/health', async (req, res) => {
     try {
         // Test database connection
         await query('SELECT NOW()');
-        res.json({ 
-            status: 'healthy', 
+        res.json({
+            status: 'healthy',
             database: 'connected',
             timestamp: new Date().toISOString()
         });
     } catch (error) {
-        res.status(503).json({ 
-            status: 'unhealthy', 
+        res.status(503).json({
+            status: 'unhealthy',
             database: 'disconnected',
-            error: error.message 
+            error: error.message
         });
     }
 });
@@ -38,7 +36,7 @@ app.use('/api/posts', postsRouter);
 
 // Root endpoint
 app.get('/', (req, res) => {
-    res.json({ 
+    res.json({
         message: 'Mondo API Server',
         version: '1.0.0',
         endpoints: {

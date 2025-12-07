@@ -2,7 +2,7 @@
  * API Client for Mondo Backend
  */
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
 // Debug: Log API URL (remove in production)
 console.log('🔗 API URL:', API_URL);
@@ -28,7 +28,7 @@ class ApiClient {
     async getPosts(language = null) {
         const lang = language || this.getCurrentLanguage();
         const url = `${this.baseUrl}/api/posts?language=${lang}`;
-        
+
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -50,7 +50,7 @@ class ApiClient {
     async getPostById(id, language = null) {
         const lang = language || this.getCurrentLanguage();
         const url = `${this.baseUrl}/api/posts/${id}?language=${lang}`;
-        
+
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -72,7 +72,7 @@ class ApiClient {
     async getPostBySlug(slug, language = null) {
         const lang = language || this.getCurrentLanguage();
         const url = `${this.baseUrl}/api/posts/slug/${slug}?language=${lang}`;
-        
+
         try {
             const response = await fetch(url);
             if (!response.ok) {

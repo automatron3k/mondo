@@ -3,24 +3,22 @@
  * Run with: node backend/test-connection.js
  */
 
-import dotenv from 'dotenv';
+import 'dotenv/config'; // Load env vars before other imports
 import { query } from './db/connection.js';
-
-dotenv.config();
 
 async function testConnection() {
     console.log('🔍 Testing database connection...\n');
-    
+
     // Check if DATABASE_URL is set
     if (!process.env.DATABASE_URL) {
         console.error('❌ DATABASE_URL is not set in .env file');
         process.exit(1);
     }
-    
+
     // Mask password in connection string for display
     const maskedUrl = process.env.DATABASE_URL.replace(/:([^:@]+)@/, ':***@');
     console.log(`📡 Connection string: ${maskedUrl}\n`);
-    
+
     try {
         // Test 1: Simple query
         console.log('Test 1: Testing basic connection...');
@@ -28,7 +26,7 @@ async function testConnection() {
         console.log('✅ Connection successful!');
         console.log(`   Current time: ${result1.rows[0].current_time}`);
         console.log(`   PostgreSQL version: ${result1.rows[0].pg_version.split(',')[0]}\n`);
-        
+
         // Test 2: Check if tables exist
         console.log('Test 2: Checking if tables exist...');
         const tablesResult = await query(`
@@ -38,7 +36,7 @@ async function testConnection() {
             AND table_type = 'BASE TABLE'
             ORDER BY table_name
         `);
-        
+
         if (tablesResult.rows.length > 0) {
             console.log('✅ Tables found:');
             tablesResult.rows.forEach(row => {
@@ -48,7 +46,7 @@ async function testConnection() {
             console.log('⚠️  No tables found. You may need to run the init.sql script.');
         }
         console.log();
-        
+
         // Test 3: Check posts table specifically
         console.log('Test 3: Checking posts table structure...');
         try {
@@ -58,7 +56,7 @@ async function testConnection() {
                 WHERE table_name = 'posts'
                 ORDER BY ordinal_position
             `);
-            
+
             if (postsCheck.rows.length > 0) {
                 console.log('✅ Posts table exists with columns:');
                 postsCheck.rows.forEach(row => {
@@ -71,7 +69,7 @@ async function testConnection() {
             console.log('⚠️  Posts table not found. Run backend/db/init.sql to create it.');
         }
         console.log();
-        
+
         // Test 4: Count posts if table exists
         try {
             const countResult = await query('SELECT COUNT(*) as count FROM posts');
@@ -79,10 +77,10 @@ async function testConnection() {
         } catch (error) {
             console.log('Test 4: Skipped (posts table not available)');
         }
-        
+
         console.log('\n✅ All connection tests passed!');
         process.exit(0);
-        
+
     } catch (error) {
         console.error('\n❌ Connection test failed!');
         console.error('Error:', error.message);

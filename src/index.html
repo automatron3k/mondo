@@ -5,36 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mondo</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.scss">
 </head>
 
 <body>
+    <div id="dither-background"></div>
     <header>
-        <h1 data-i18n="title">Mondo - Como este mundo, pero más redondo</h1>
+        <!-- React Hero Section -->
+        <h1 data-i18n="title" id="react-hero" style="height: 80px; width: 100%; position: relative; overflow: hidden">
+        </h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#web-pages" data-i18n="web-pages">Páginas</a></li>
+                <li><a href="#web-apps" data-i18n="web-apps">Aplicaciones</a></li>
+                <li><a href="#web-widgets" data-i18n="web-widgets" style="margin-right: 2rem;">Widgets</a></li>
+            </ul>
+        </nav>
         <div class="header-controls">
             <select class="language-switcher" id="languageSwitcher" aria-label="Select language">
-                <option value="spa">SPA</option>
-                <option value="eng">ENG</option>
+                <option value="spa">ES</option>
+                <option value="eng">EN</option>
                 <option value="pt">PT</option>
                 <option value="fr">FR</option>
-                <option value="jap">JAP</option>
+                <option value="jap">JP</option>
             </select>
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                <span class="theme-toggle-icon" id="themeIcon">🌚</span>
-                <span id="themeText" data-i18n="dark">Dark</span>
-            </button>
+            <!-- CSS Theme Toggle -->
+            <label class="theme-switch" aria-label="Toggle theme">
+                <input type="checkbox" id="themeToggleCheckbox">
+                <div class="slider round">
+                    <span class="icon-sun">🔆</span>
+                    <span class="icon-moon">🌙</span>
+                </div>
+            </label>
         </div>
     </header>
+
     <main>
-        <section>
-            <h2 data-i18n="inicio">Inicio</h2>
-            <h2 data-i18n="web-pages">Web pages</h2>
-            <h2 data-i18n="web-apps">Web apps</h2>
-            <h2 data-i18n="web-widgets">Web widgets</h2>
-            <h2 data-i18n="plugins">Plugins</h2>
+        <!-- Tagline React Mount Point -->
+        <div id="tagline-root" class="tagline"></div>
+
+        <section id="web-pages">
+            <h2 data-i18n="web-pages">Páginas web</h2>
+            <p>Static and dynamic websites tailored to your brand.</p>
         </section>
-        <p data-i18n="tagline">Desarrollo web: social, cultural, gentil</p>
-        
+
+        <section id="web-apps">
+            <h2 data-i18n="web-apps">Aplicaciones web</h2>
+            <p>Complex, interactive web applications built for performance.</p>
+        </section>
+
+        <section id="web-widgets">
+            <h2 data-i18n="web-widgets">Widgets web</h2>
+            <p>Custom components to enhance your existing site.</p>
+        </section>
+
         <!-- Posts Section -->
         <section id="posts-section">
             <h2>Blog Posts</h2>
@@ -48,7 +75,7 @@
     <script type="module" src="api.js"></script>
     <script type="module" src="translation-service.js"></script>
     <script type="module" src="posts.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.jsx"></script>
 </body>
 
 </html>
