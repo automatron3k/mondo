@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const characters = 'javierlabordemondo=\/{}[]%#"!"?¿;«»*+¬∞•~∫≈ß∂ƒλ~πøı¥†';
+const characters = 'javierlabordemondo={}[]%#"!"?¿;«»_*+¬∞•~∫≈ß∂ƒλ~πøı¥†';
 
 export default function DecryptedText({
     text,

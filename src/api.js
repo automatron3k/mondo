@@ -21,13 +21,12 @@ class ApiClient {
     }
 
     /**
-     * Fetch all posts
-     * @param {string} language - Optional language code
-     * @returns {Promise<Array>} Array of posts
+     * Get web pages
      */
-    async getPosts(language = null) {
+
+    async getWebPages(language = null) {
         const lang = language || this.getCurrentLanguage();
-        const url = `${this.baseUrl}/api/posts?language=${lang}`;
+        const url = `${this.baseUrl}/api/portfolio?language=${lang}&category=web_pages`;
 
         try {
             const response = await fetch(url);
@@ -36,42 +35,14 @@ class ApiClient {
             }
             return await response.json();
         } catch (error) {
-            console.error('Error fetching posts:', error);
+            console.error('Error fetching webpages:', error);
             throw error;
         }
     }
 
-    /**
-     * Fetch a single post by ID
-     * @param {number} id - Post ID
-     * @param {string} language - Optional language code
-     * @returns {Promise<Object>} Post object
-     */
-    async getPostById(id, language = null) {
+    async getWebPagesById(id, language = null) {
         const lang = language || this.getCurrentLanguage();
-        const url = `${this.baseUrl}/api/posts/${id}?language=${lang}`;
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Error fetching post:', error);
-            throw error;
-        }
-    }
-
-    /**
-     * Fetch a single post by slug
-     * @param {string} slug - Post slug
-     * @param {string} language - Optional language code
-     * @returns {Promise<Object>} Post object
-     */
-    async getPostBySlug(slug, language = null) {
-        const lang = language || this.getCurrentLanguage();
-        const url = `${this.baseUrl}/api/posts/slug/${slug}?language=${lang}`;
+        const url = `${this.baseUrl}/api/portfolio/${id}?language=${lang}&category=web_pages`;
 
         try {
             const response = await fetch(url);

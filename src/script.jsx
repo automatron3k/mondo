@@ -525,11 +525,11 @@ import DitherBackground from './DitherBackground.jsx';
 import DecryptedText from './ScrambleText';
 
 const taglineData = {
-    spa: { prefix: 'Desarrollo web:', words: ['social', 'cultural', 'humano'] },
-    eng: { prefix: 'Web development:', words: ['social', 'cultural', 'human'] },
-    pt: { prefix: 'Desenvolvimento web:', words: ['social', 'cultural', 'humano'] },
-    fr: { prefix: 'Développement web:', words: ['social', 'culturel', 'humain'] },
-    jap: { prefix: 'ウェブ開発：', words: ['社会的', '文化的', '人間的'] }
+    spa: { prefix: 'Desarrollo web:', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
+    eng: { prefix: 'Web development:', words: ['social', 'open-source','cultural', 'human', 'low-code', 'full-stack'] },
+    pt: { prefix: 'Desenvolvimento web:', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
+    fr: { prefix: 'Développement web:', words: ['social', 'open-source', 'culturel', 'humain', 'low-code', 'full-stack'] },
+    jap: { prefix: 'ウェブ開発：', words: ['社会的', 'オープンソース', '文化的', '人間的', 'ローコード', 'フルスタック'] }
 };
 
 function Tagline() {
@@ -598,46 +598,158 @@ const translations = {
         'dark': 'Oscuro',
         'light': 'Claro',
         'inicio': 'Inicio',
+        'how-we-work': 'Cómo trabajamos',
+        'portfolio': 'Portafolio',
+        'art': 'Arte',
         'web-pages': 'Páginas',
         'web-apps': 'Aplicaciones',
         'web-widgets': 'Widgets',
+        'plugins': 'Plugins',
+        'security': 'Seguro',
+        'open-source': 'Open-source',
+        'custom-made': 'Hecho a medida',
+        'scalability': 'Escalable',
+        'how-we-work-description': 'Combinamos lo mejor del low-code y el high-code para construir plataformas sólidas, escalables, seguras y visualmente atractivas, listas para crecer con tu organización.<br><br>Priorizamos tecnologías y herramientas open-source, porque creemos en la transparencia, la estabilidad y la autonomía tecnológica a largo plazo.<br><br>El usuario es el centro de nuestro trabajo, cada solución es única y está pensada para una óptima experiencia de usuario.<br>',
+        'security-tokens': 'Tokens seguros',
+        'security-roles': 'Roles diferenciados',
+        'security-encryption': 'Encriptación de datos',
+        'opensource-version-control': 'Control de versiones',
+        'opensource-communities': 'Comunidades activas',
+        'opensource-components': 'Miles de componentes',
+        'custom-visuals': 'Visuales adaptables',
+        'custom-functions': 'Funciones personalizadas',
+        'custom-reviews': 'Revisiones periódicas',
+        'scalability-nature': 'Escalable por naturaleza',
+        'scalability-architecture': 'Flexibilidad de arquitectura',
+        'scalability-schemas': 'Schemas inteligentes',
+        'cta-button': 'Quiero saber más',
         'copyright': '© 2025 Mondo. Todos los derechos reservados.'
     },
     eng: {
         'dark': 'Dark',
         'light': 'Light',
         'inicio': 'Home',
+        'how-we-work': 'How we work',
+        'portfolio': 'Portfolio',
+        'art': 'Art',
         'web-pages': 'Web Pages',
         'web-apps': 'Web Apps',
         'web-widgets': 'Web Widgets',
+        'security': 'Secure',
+        'open-source': 'Open-source',
+        'custom-made': 'Custom Made',
+        'scalability': 'Scalable',
+        'how-we-work-description': 'We combine the best of low-code and high-code to build solid, scalable, secure and visually appealing platforms, ready to grow with your organization.<br><br>We prioritize open-source technologies and tools, because we believe in transparency, stability and long-term technological autonomy.<br><br>User experience is a priority.<br>Each solution is unique and custom-made to meet your needs.',
+        'security-tokens': 'Secure tokens',
+        'security-roles': 'Differentiated roles',
+        'security-encryption': 'Data encryption',
+        'opensource-version-control': 'Version control',
+        'opensource-communities': 'Active communities',
+        'opensource-components': 'Thousands of components',
+        'custom-visuals': 'Adaptable visuals',
+        'custom-functions': 'Custom functions',
+        'custom-reviews': 'Periodic reviews',
+        'scalability-nature': 'Scalable by nature',
+        'scalability-architecture': 'Architecture flexibility',
+        'scalability-schemas': 'Smart schemas',
+        'cta-button': 'I want to know more',
+        'modal-title': 'Contact Us',
+        'modal-description': 'Fill out the form and we will get in touch with you.',
         'copyright': '© 2025 Mondo. All rights reserved.'
     },
     pt: {
         'dark': 'Escuro',
         'light': 'Claro',
         'inicio': 'Início',
+        'how-we-work': 'Como trabalhamos',
+        'portfolio': 'Portfólio',
+        'art': 'Arte',
         'web-pages': 'Páginas',
         'web-apps': 'Aplicativos',
         'web-widgets': 'Widgets',
+        'security': 'Seguro',
+        'open-source': 'Código aberto',
+        'custom-made': 'Feito sob medida',
+        'scalability': 'Escalável',
+        'how-we-work-description': 'Combinamos o melhor do low-code e high-code para construir plataformas sólidas, escaláveis, seguras e visualmente atraentes, prontas para crescer com sua organização.<br><br>Priorizamos tecnologias e ferramentas de código aberto, porque acreditamos na transparência, estabilidade e autonomia tecnológica a longo prazo.<br><br>A experiência do usuário é prioridade.<br>Cada solução é única e feita sob medida para atender suas necessidades.',
+        'security-tokens': 'Tokens seguros',
+        'security-roles': 'Funções diferenciadas',
+        'security-encryption': 'Criptografia de dados',
+        'opensource-version-control': 'Controle de versão',
+        'opensource-communities': 'Comunidades ativas',
+        'opensource-components': 'Milhares de componentes',
+        'custom-visuals': 'Visuais adaptáveis',
+        'custom-functions': 'Funções personalizadas',
+        'custom-reviews': 'Revisões periódicas',
+        'scalability-nature': 'Escalável por natureza',
+        'scalability-architecture': 'Flexibilidade de arquitetura',
+        'scalability-schemas': 'Schemas inteligentes',
+        'cta-button': 'Quería saber mais',
         'copyright': '© 2025 Mondo. Todos os direitos reservados.'
     },
     fr: {
         'dark': 'Sombre',
         'light': 'Clair',
         'inicio': 'Accueil',
+        'how-we-work': 'Comment nous travaillons',
+        'portfolio': 'Portfolio',
+        'art': 'Art',
         'web-pages': 'Pages web',
         'web-apps': 'Applications web',
         'web-widgets': 'Widgets web',
+        'security': 'Sécure',
+        'open-source': 'Open-source',
+        'custom-made': 'Sur mesure',
+        'scalability': 'Évolutive',
+        'how-we-work-description': 'Nous combinons le meilleur du low-code et du high-code pour construire des plateformes solides, évolutives, sécurisées et visuellement attrayantes, prêtes à grandir avec votre organisation.<br><br>Nous privilégions les technologies et outils open-source, car nous croyons en la transparence, la stabilité et l\'autonomie technologique à long terme.<br><br>L\'expérience utilisateur est une priorité.<br>Chaque solution est unique et sur mesure pour répondre à vos besoins.',
+        'security-tokens': 'Jetons sécurisés',
+        'security-roles': 'Rôles différenciés',
+        'security-encryption': 'Chiffrement des données',
+        'opensource-version-control': 'Contrôle de version',
+        'opensource-communities': 'Communautés actives',
+        'opensource-components': 'Des milliers de composants',
+        'custom-visuals': 'Visuels adaptables',
+        'custom-functions': 'Fonctions personnalisées',
+        'custom-reviews': 'Révisions périodiques',
+        'scalability-nature': 'Évolutif par nature',
+        'scalability-architecture': 'Flexibilité d\'architecture',
+        'scalability-schemas': 'Schémas intelligents',
+        'cta-button': 'Je veux en savoir plus',
+        'modal-title': 'Contactez-nous',
+        'modal-description': 'Remplissez le formulaire et nous vous contacterons.',
         'copyright': '© 2025 Mondo. Tous droits réservés.'
     },
     jap: {
         'dark': 'ダーク',
         'light': 'ライト',
         'inicio': 'ホーム',
+        'how-we-work': 'どのように働きますか',
+        'portfolio': 'ポートフォリオ',
+        'art': '芸術',
         'web-pages': 'ウェブページ',
         'web-apps': 'ウェブアプリ',
         'web-widgets': 'ウェブウィジェット',
         'plugins': 'プラグイン',
+        'security': 'セキュリティ',
+        'open-source': 'オープンソース',
+        'custom-made': '特注',
+        'scalability': 'スケーラブル',
+        'how-we-work-description': 'ローコードとハイコードの最良の部分を組み合わせて、組織とともに成長できる堅牢でスケーラブルで安全で視覚的に魅力的なプラットフォームを構築します。<br><br>透明性、安定性、長期的な技術的自律性を信じているため、オープンソースの技術とツールを優先します。<br><br>ユーザーエクスペリエンスが優先事項です。<br>各ソリューションはユニークでニーズに合わせてカスタムメイドされています。',
+        'security-tokens': '安全なトークン',
+        'security-roles': '差別化された役割',
+        'security-encryption': 'データ暗号化',
+        'opensource-version-control': 'バージョン管理',
+        'opensource-communities': 'アクティブなコミュニティ',
+        'opensource-components': '何千ものコンポーネント',
+        'custom-visuals': '適応可能なビジュアル',
+        'custom-functions': 'カスタム機能',
+        'custom-reviews': '定期的なレビュー',
+        'scalability-nature': '本質的にスケーラブル',
+        'scalability-architecture': 'アーキテクチャの柔軟性',
+        'scalability-schemas': 'スマートスキーマ',
+        'cta-button': 'もっと知りたい',
+        'modal-title': 'お問い合わせ',
+        'modal-description': 'フォームに記入していただければ、ご連絡いたします。',
         'copyright': '© 2025 Mondo. 全著作権所有。'
     }
 };
@@ -656,7 +768,8 @@ function translatePage(language) {
             return;
         }
         if (translations[language] && translations[language][key]) {
-            element.textContent = translations[language][key];
+            // Use innerHTML for elements that may contain HTML tags (like <br>)
+            element.innerHTML = translations[language][key];
         }
     });
 
@@ -720,4 +833,41 @@ function translatePage(language) {
         // Dispatch custom event for React components
         window.dispatchEvent(new CustomEvent('languageChange', { detail: selectedLanguage }));
     });
+})();
+// Import Web Pages Controller
+import './webPages.js';
+
+// Modal functionality
+(function () {
+    const ctaButton = document.getElementById('cta-button');
+    const modal = document.getElementById('contact-modal');
+    const closeButton = document.querySelector('.modal-close');
+
+    if (ctaButton && modal) {
+        // Open modal
+        ctaButton.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        // Close modal on X button
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+        }
+
+        // Close modal on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            }
+        });
+    }
 })();

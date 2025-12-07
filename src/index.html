@@ -19,9 +19,9 @@
         </h1>
         <nav class="main-nav">
             <ul>
-                <li><a href="#web-pages" data-i18n="web-pages">Páginas</a></li>
-                <li><a href="#web-apps" data-i18n="web-apps">Aplicaciones</a></li>
-                <li><a href="#web-widgets" data-i18n="web-widgets" style="margin-right: 2rem;">Widgets</a></li>
+                <li><a href="#how-we-work" data-i18n="how-we-work">How we work</a></li>
+                <li><a href="#portfolio" data-i18n="portfolio">Portfolio</a></li>
+                <li><a href="#art" data-i18n="art" style="margin-right: 2rem;">Art</a></li>
             </ul>
         </nav>
         <div class="header-controls">
@@ -44,31 +44,104 @@
     </header>
 
     <main>
-        <!-- Tagline React Mount Point -->
+        <!-- Tagline React Mount Point // THIS IS THE REACT COMPONENT SHOWING 'WEB DEVELOPMENT...'-->
         <div id="tagline-root" class="tagline"></div>
 
-        <section id="web-pages">
-            <h2 data-i18n="web-pages">Páginas web</h2>
-            <p>Static and dynamic websites tailored to your brand.</p>
+        <section id="how-we-work">
+            <h2 data-i18n="how-we-work">How we work</h2>
+            <div class="how-we-work-content">
+                <p class="how-we-work-text" data-i18n="how-we-work-description">Combinamos lo mejor del low-code y el
+                    high-code para construir plataformas
+                    sólidas, escalables, seguras y visualmente atractivas, listas para crecer con tu organización.<br>
+                    <br>Priorizamos tecnologías y herramientas open-source, porque creemos en la transparencia,
+                    la estabilidad y la autonomía tecnológica a largo plazo.<br>
+                    <br>El usuario es el centro de nuestro trabajo, cada solución es única y pensada íntegramente en la
+                    experiencia del usuario.
+                </p>
+                <div id="how-we-work-container">
+                    <div class="work-pill security-pill">
+                        <span data-i18n="security">Seguridad</span>
+                        <ul class="security-list">
+                            <li data-i18n="security-tokens">Tokens seguros</li>
+                            <li data-i18n="security-roles">Roles diferenciados</li>
+                            <li data-i18n="security-encryption">Encriptación de datos</li>
+                        </ul>
+                        <div class="marquee-container">
+                            <div class="marquee-content">
+                                <b>HTTPS</b> • <b>SSO</b> • <b>TLS 1.3</b> • <b>JWT</b> • <b>API</b> • <b>OAuth 2.0</b>
+                                •
+                                <b>HTTPS</b> • <b>SSO</b> • <b>TLS 1.3</b> • <b>JWT</b> • <b>API</b> • <b>OAuth 2.0</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work-pill open-source-pill">
+                        <span data-i18n="open-source">Open-source</span>
+                        <ul class="open-source-list">
+                            <li data-i18n="opensource-version-control">Control de versiones</li>
+                            <li data-i18n="opensource-communities">Comunidades activas</li>
+                            <li data-i18n="opensource-components">Miles de componentes</li>
+                        </ul>
+                        <div class="pill-icons">
+                            <img src="Git-Icon-1788C.svg" alt="Git" class="icon-git">
+                            <img src="github-mark.svg" alt="GitHub" class="icon-github icon-github-light">
+                            <img src="github-mark-white.svg" alt="GitHub" class="icon-github icon-github-dark">
+                        </div>
+                    </div>
+                    <div class="work-pill custom-made-pill">
+                        <span data-i18n="custom-made">Hecho a medida</span>
+                        <ul class="custom-made-list">
+                            <li data-i18n="custom-visuals">Visuales adaptables</li>
+                            <li data-i18n="custom-functions">Funciones personalizadas</li>
+                            <li data-i18n="custom-reviews">Revisiones periódicas</li>
+                        </ul>
+                        <div class="pill-icons">
+                            <img src="html-5-svgrepo-com.svg" alt="HTML5" class="icon-tech">
+                            <img src="css-3-svgrepo-com.svg" alt="CSS3" class="icon-tech">
+                            <img src="javascript-svgrepo-com.svg" alt="JavaScript" class="icon-tech">
+                        </div>
+                    </div>
+                    <div class="work-pill scalability-pill">
+                        <span data-i18n="scalability">Escalabilidad</span>
+                        <ul class="scalability-list">
+                            <li data-i18n="scalability-nature">Escalable por naturaleza</li>
+                            <li data-i18n="scalability-architecture">Flexibilidad de arquitectura</li>
+                            <li data-i18n="scalability-schemas">Schemas inteligentes</li>
+                        </ul>
+                        <div class="pill-icons">
+                            <img src="postgresql-logo-svgrepo-com.svg" alt="PostgreSQL" class="icon-tech">
+                            <img src="supabase-logo-icon.svg" alt="Supabase" class="icon-tech">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="web-apps">
-            <h2 data-i18n="web-apps">Aplicaciones web</h2>
-            <p>Complex, interactive web applications built for performance.</p>
+        <section id="portfolio">
+            <h2 data-i18n="portfolio">Portfolio</h2>
+            <p>Revisa nuestro trabajo aquí.</p>
+            <div id="portfolio-container"></div>
         </section>
 
-        <section id="web-widgets">
-            <h2 data-i18n="web-widgets">Widgets web</h2>
-            <p>Custom components to enhance your existing site.</p>
+        <section id="arte">
+            <h2 data-i18n="arte">Arte</h2>
+            <p>Porque no todo es código, revisa el trabajo de nuestros colaboradores fuera de la pantalla.</p>
         </section>
 
-        <!-- Posts Section -->
-        <section id="posts-section">
-            <h2>Blog Posts</h2>
-            <div id="posts-container"></div>
-            <div id="post-container"></div>
-        </section>
     </main>
+
+    <!-- Floating CTA Button -->
+    <button id="cta-button" class="floating-cta" data-i18n="cta-button">Quiero saber más</button>
+
+    <!-- Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 data-i18n="modal-title">Contáctanos</h2>
+            <p data-i18n="modal-description">Completa el formulario y nos pondremos en contacto contigo.</p>
+            <!-- Modal content will be added here later -->
+        </div>
+    </div>
+
     <footer>
         <p data-i18n="copyright">© 2025 Mondo. All rights reserved.</p>
     </footer>

@@ -116,7 +116,7 @@ body {
     height: 100%;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 0.9;
     /* Subtle transparency */
 }
 
@@ -126,6 +126,7 @@ header {
     font-size: 1.5rem;
     font-weight: 600;
     background-color: var(--header-bg);
+    opacity: 0.9;
     padding: 0.5rem 2rem;
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -206,7 +207,7 @@ footer {
         font-weight: 500;
         font-size: 0.95rem;
         transition: color 0.3s ease;
-        opacity: 0.8;
+        opacity: 1;
         white-space: nowrap;
         line-height: 1;
         /* Collapses excessive vertical space */
@@ -350,15 +351,15 @@ footer {
    Sections & Features
    ========================================= */
 
-/* Hero Tagline */
+/* Hero Tagline // ESTO ES EL COMPONENENTE REACT QUE MUESTRA 'Desarrollo web...'*/
 .tagline {
     font-size: 5.5rem;
     font-weight: 400;
-    min-height: calc(100vh - #{$header-height-offset});
-    /* Full Height Hero */
+    min-height: calc(100vh - 200px);
+    /* Reduced height to account for header and floating button */
     width: 100%;
     color: var(--text-color);
-    opacity: 0.8;
+    opacity: 0.9;
     text-align: left;
     white-space: nowrap;
     gap: 1.5rem;
@@ -377,130 +378,224 @@ footer {
     }
 }
 
-/* Generic Section Styles */
-section {
-    margin-bottom: 2rem;
+/* How We Work Section */
+#how-we-work {
+    .how-we-work-content {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
 
-    h2 {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-        font-weight: 500;
+        @include media-down($breakpoint-mobile) {
+            flex-direction: column;
+        }
     }
-}
 
-/* Posts Section */
-#posts-section {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
+    .how-we-work-text {
+        flex: 1;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-align: justify;
 
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 2rem;
+        border-radius: 1rem;
+        opacity: 1;
+    }
+
+    #how-we-work-container {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .work-pill {
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        text-align: center;
         font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        opacity: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 140px;
+        position: relative;
+        overflow: hidden;
+
+        span[data-i18n] {
+            margin-bottom: auto;
+            margin-top: 0.5rem;
+        }
+
+        &:hover {
+            transform: translateY(-5px) scale(1.02);
+            background-color: var(--button-bg);
+            color: var(--bg-color); // Invert text color on hover
+            border-color: var(--button-bg);
+            opacity: 1;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+            .pill-icons svg {
+                stroke: var(--bg-color);
+            }
+        }
     }
-}
 
-#posts-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
+    /* Security List */
+    .security-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+        font-size: 0.85rem;
+        opacity: 0.9;
+        text-align: left;
 
-/* Post Cards */
-.post-card {
-    background-color: var(--header-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+        li {
+            margin-bottom: 0.25rem;
 
-    &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            &:before {
+                content: "✓ ";
+                margin-right: 0.5rem;
+            }
+        }
     }
 
-    h3 {
-        font-size: 1.25rem;
-        margin-bottom: 0.75rem;
-        font-weight: 600;
+    .open-source-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+        font-size: 0.85rem;
+        opacity: 0.9;
+        text-align: left;
 
-        a {
-            color: var(--text-color);
-            text-decoration: none;
-            transition: color 0.2s ease;
+        li {
+            margin-bottom: 0.25rem;
 
-            &:hover {
-                color: var(--border-color);
-                text-decoration: underline;
+            &:before {
+                content: "✓ ";
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    .custom-made-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+        font-size: 0.85rem;
+        opacity: 0.9;
+        text-align: left;
+
+        li {
+            margin-bottom: 0.25rem;
+
+            &:before {
+                content: "✓ ";
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    .scalability-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0;
+        font-size: 0.85rem;
+        opacity: 0.9;
+        text-align: left;
+
+        li {
+            margin-bottom: 0.25rem;
+
+            &:before {
+                content: "✓ ";
+                margin-right: 0.5rem;
+            }
+        }
+    }
+
+    /* Marquee Animation for Security Pill */
+    .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        margin-bottom: auto;
+        opacity: 1;
+        font-size: 0.8rem;
+    }
+
+    .marquee-content {
+        display: inline-block;
+        animation: marquee 15s linear infinite;
+
+        b {
+            font-weight: 700;
+        }
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Icons for Open Source Pill */
+    .pill-icons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            height: 24px;
+            width: auto;
+            transition: opacity 0.3s ease;
+        }
+
+        .icon-git {
+            height: 24px;
+        }
+
+        /* Theme-based GitHub icon switching */
+        .icon-github-light {
+            display: block;
+        }
+
+        .icon-github-dark {
+            display: none;
+        }
+
+        [data-theme="dark"] & {
+            .icon-github-light {
+                display: none;
+            }
+
+            .icon-github-dark {
+                display: block;
             }
         }
     }
 }
 
-.post-excerpt {
-    color: var(--text-color);
-    opacity: 0.8;
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
+/* Generic Section Styles */
+section {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 
-.post-meta {
-    display: flex;
-    gap: 1rem;
-    font-size: 0.875rem;
-    color: var(--text-color);
-    opacity: 0.7;
-}
-
-.post-author {
-    font-weight: 500;
-}
-
-.post-date {
-    font-style: italic;
-}
-
-/* Post Detail */
-#post-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.post-detail {
-    background-color: var(--header-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    padding: 2rem;
-
-    h1 {
-        font-size: 2rem;
+    h2 {
+        font-size: 2.5rem;
+        padding-top: 4rem;
         margin-bottom: 1rem;
-        font-weight: 600;
-    }
-
-    .post-meta {
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--border-color);
-    }
-}
-
-.post-content {
-    line-height: 1.8;
-    color: var(--text-color);
-
-    p {
-        margin-bottom: 1.5rem;
-    }
-
-    h2,
-    h3,
-    h4 {
-        margin-top: 2rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
+        font-weight: 500;
     }
 }
 
@@ -615,4 +710,109 @@ section {
     padding: 3rem;
     opacity: 0.6;
     font-style: italic;
+}
+
+/* =========================================
+   Floating CTA Button
+   ========================================= */
+
+.floating-cta {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+
+    background-color: var(--button-bg);
+    color: var(--bg-color);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateX(-50%) translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    &:active {
+        transform: translateX(-50%) translateY(-1px);
+    }
+}
+
+/* =========================================
+   Modal
+   ========================================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+
+    &.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.modal-content {
+    background-color: var(--header-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.3s ease;
+
+    h2 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        color: var(--text-color);
+    }
+
+    p {
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+        opacity: 0.9;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

@@ -1,11 +1,11 @@
 import 'dotenv/config'; // Load env vars before other imports
 import express from 'express';
 import cors from 'cors';
-import postsRouter from './routes/posts.js';
+import portfolioRouter from './routes/portfolio.js';
 import { query } from './db/connection.js';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors());
@@ -32,7 +32,7 @@ app.get('/health', async (req, res) => {
 });
 
 // API Routes
-app.use('/api/posts', postsRouter);
+app.use('/api/portfolio', portfolioRouter);
 
 // Root endpoint
 app.get('/', (req, res) => {
