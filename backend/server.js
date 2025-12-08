@@ -34,6 +34,27 @@ app.get('/health', async (req, res) => {
 // API Routes
 app.use('/api/portfolio', portfolioRouter);
 
+// Contact form webhook proxy (bypasses CORS)
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { name, organization, email, subject, message, sendCopy } = req.body;
+
+        // Insert into Supabase
+        const result = await query(
+            `INSERT INTO mondo_contact_form (name, org, email, subject, message, send_copy) 
+             VALUES ($1, $2, $3, $4, $5, $6) 
+             RETURNING id`,
+            [name, organization || null, email, subject || null, message || null, sendCopy || false]
+        );
+
+        console.log('✅ Contact form submission saved:', result.rows[0].id);
+        res.status(200).json({ success: true, id: result.rows[0].id });
+    } catch (error) {
+        console.error('❌ Error saving contact form:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 // Root endpoint
 app.get('/', (req, res) => {
     res.json({

@@ -19,7 +19,7 @@
         </h1>
         <nav class="main-nav">
             <ul>
-                <li><a href="#how-we-work" data-i18n="how-we-work">How we work</a></li>
+                <li><a href="#what-we-do" data-i18n="what-we-do">What we do</a></li>
                 <li><a href="#portfolio" data-i18n="portfolio">Portfolio</a></li>
                 <li><a href="#art" data-i18n="art" style="margin-right: 2rem;">Art</a></li>
             </ul>
@@ -47,10 +47,10 @@
         <!-- Tagline React Mount Point // THIS IS THE REACT COMPONENT SHOWING 'WEB DEVELOPMENT...'-->
         <div id="tagline-root" class="tagline"></div>
 
-        <section id="how-we-work">
-            <h2 data-i18n="how-we-work">How we work</h2>
-            <div class="how-we-work-content">
-                <p class="how-we-work-text" data-i18n="how-we-work-description">Combinamos lo mejor del low-code y el
+        <section id="what-we-do">
+            <h2 data-i18n="what-we-do">What we do</h2>
+            <div class="what-we-do-content">
+                <p class="what-we-do-text" data-i18n="what-we-do-description">Combinamos lo mejor del low-code y el
                     high-code para construir plataformas
                     sólidas, escalables, seguras y visualmente atractivas, listas para crecer con tu organización.<br>
                     <br>Priorizamos tecnologías y herramientas open-source, porque creemos en la transparencia,
@@ -58,7 +58,7 @@
                     <br>El usuario es el centro de nuestro trabajo, cada solución es única y pensada íntegramente en la
                     experiencia del usuario.
                 </p>
-                <div id="how-we-work-container">
+                <div id="what-we-do-container">
                     <div class="work-pill security-pill">
                         <span data-i18n="security">Seguridad</span>
                         <ul class="security-list">
@@ -137,9 +137,48 @@
         <div class="modal-content">
             <span class="modal-close">&times;</span>
             <h2 data-i18n="modal-title">Contáctanos</h2>
-            <p data-i18n="modal-description">Completa el formulario y nos pondremos en contacto contigo.</p>
-            <!-- Modal content will be added here later -->
+
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name" data-i18n="form-name">Nombre</label>
+                    <input type="text" id="name" name="name" required placeholder="Juan Pérez">
+                </div>
+
+                <div class="form-group">
+                    <label for="organization" data-i18n="form-organization">Organización</label>
+                    <input type="text" id="organization" name="organization"
+                        placeholder="(opcional)">
+                </div>
+
+                <div class="form-group">
+                    <label for="email" data-i18n="form-email">Correo</label>
+                    <input type="email" id="email" name="email" required placeholder="info@mondo.org">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject" data-i18n="form-subject">Asunto</label>
+                    <input type="text" id="subject" name="subject" placeholder="Mondo la lleva">
+                </div>
+
+                <div class="form-group">
+                    <label for="message" data-i18n="form-message">Mensaje</label>
+                    <textarea id="message" name="message" rows="5"
+                        placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="copy" name="copy">
+                    <label for="copy" data-i18n="form-copy">Quiero recibir una copia</label>
+                </div>
+
+                <button type="submit" class="submit-button" data-i18n="form-submit">Enviar</button>
+            </form>
         </div>
+    </div>
+
+    <!-- Custom Notification -->
+    <div id="notification" class="notification">
+        <span class="notification-message"></span>
     </div>
 
     <footer>

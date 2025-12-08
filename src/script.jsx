@@ -430,7 +430,10 @@ export default function ASCIIText({
                     if (entry.isIntersecting && entry.boundingClientRect.width > 0 && entry.boundingClientRect.height > 0) {
                         const { width: w, height: h } = entry.boundingClientRect;
 
-                        initializeAscii(w, h);
+                        // Add small delay to ensure CSS is fully applied
+                        setTimeout(() => {
+                            initializeAscii(w, h);
+                        }, 100);
 
                         observer.disconnect();
                     }
@@ -448,11 +451,34 @@ export default function ASCIIText({
             };
         }
 
-        const cleanupResize = initializeAscii(width, height);
+        // Add small delay for initial render to ensure CSS is loaded
+        const timeoutId = setTimeout(() => {
+            const cleanupResize = initializeAscii(width, height);
+
+            // Add ResizeObserver to handle container size changes
+            const resizeObserver = new ResizeObserver((entries) => {
+                for (const entry of entries) {
+                    const { width: w, height: h } = entry.contentRect;
+                    if (w > 0 && h > 0 && asciiRef.current) {
+                        asciiRef.current.setSize(w, h);
+                    }
+                }
+            });
+
+            resizeObserver.observe(containerRef.current);
+
+            return () => {
+                if (cleanupResize) {
+                    cleanupResize();
+                }
+                resizeObserver.disconnect();
+            };
+        }, 100);
 
         return () => {
-            if (cleanupResize) {
-                cleanupResize();
+            clearTimeout(timeoutId);
+            if (asciiRef.current) {
+                asciiRef.current.dispose();
             }
         };
     }, [text, asciiFontSize, textFontSize, textColor, planeBaseHeight, enableWaves, reactiveness]);
@@ -463,7 +489,7 @@ export default function ASCIIText({
             className="ascii-text-container"
             style={{
                 position: 'absolute',
-                width: '30%',
+                width: '100%',
                 height: '100%' // este cambia el tamaño que ocupa la imagen dentro del contenedor
             }}
         >
@@ -516,7 +542,7 @@ if (container) {
             textFontSize={200}
             textColor="#ffffff"
             enableWaves={false}
-            reactiveness={1}
+            reactiveness={0.7}
         />
     );
 }
@@ -526,7 +552,7 @@ import DecryptedText from './ScrambleText';
 
 const taglineData = {
     spa: { prefix: 'Desarrollo web:', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
-    eng: { prefix: 'Web development:', words: ['social', 'open-source','cultural', 'human', 'low-code', 'full-stack'] },
+    eng: { prefix: 'Web development:', words: ['social', 'open-source', 'cultural', 'human', 'low-code', 'full-stack'] },
     pt: { prefix: 'Desenvolvimento web:', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
     fr: { prefix: 'Développement web:', words: ['social', 'open-source', 'culturel', 'humain', 'low-code', 'full-stack'] },
     jap: { prefix: 'ウェブ開発：', words: ['社会的', 'オープンソース', '文化的', '人間的', 'ローコード', 'フルスタック'] }
@@ -598,7 +624,7 @@ const translations = {
         'dark': 'Oscuro',
         'light': 'Claro',
         'inicio': 'Inicio',
-        'how-we-work': 'Cómo trabajamos',
+        'what-we-do': 'Qué hacemos',
         'portfolio': 'Portafolio',
         'art': 'Arte',
         'web-pages': 'Páginas',
@@ -609,7 +635,7 @@ const translations = {
         'open-source': 'Open-source',
         'custom-made': 'Hecho a medida',
         'scalability': 'Escalable',
-        'how-we-work-description': 'Combinamos lo mejor del low-code y el high-code para construir plataformas sólidas, escalables, seguras y visualmente atractivas, listas para crecer con tu organización.<br><br>Priorizamos tecnologías y herramientas open-source, porque creemos en la transparencia, la estabilidad y la autonomía tecnológica a largo plazo.<br><br>El usuario es el centro de nuestro trabajo, cada solución es única y está pensada para una óptima experiencia de usuario.<br>',
+        'what-we-do-description': 'Combinamos lo mejor del low-code y el high-code para construir plataformas sólidas, escalables, seguras y visualmente atractivas, listas para crecer con tu proyecto.<br><br>Priorizamos tecnologías y herramientas open-source, porque creemos en la transparencia, la estabilidad y la autonomía tecnológica a largo plazo.<br><br>El usuario es el centro de nuestro trabajo, cada solución es única y está pensada para una óptima experiencia de usuario.<br>',
         'security-tokens': 'Tokens seguros',
         'security-roles': 'Roles diferenciados',
         'security-encryption': 'Encriptación de datos',
@@ -629,7 +655,7 @@ const translations = {
         'dark': 'Dark',
         'light': 'Light',
         'inicio': 'Home',
-        'how-we-work': 'How we work',
+        'what-we-do': 'What we do',
         'portfolio': 'Portfolio',
         'art': 'Art',
         'web-pages': 'Web Pages',
@@ -639,7 +665,7 @@ const translations = {
         'open-source': 'Open-source',
         'custom-made': 'Custom Made',
         'scalability': 'Scalable',
-        'how-we-work-description': 'We combine the best of low-code and high-code to build solid, scalable, secure and visually appealing platforms, ready to grow with your organization.<br><br>We prioritize open-source technologies and tools, because we believe in transparency, stability and long-term technological autonomy.<br><br>User experience is a priority.<br>Each solution is unique and custom-made to meet your needs.',
+        'what-we-do-description': 'We combine the best of low-code and high-code to build solid, scalable, secure and visually appealing platforms, ready to grow with your project.<br><br>We prioritize open-source technologies and tools, because we believe in transparency, stability and long-term technological autonomy.<br><br>User experience is a priority.<br>Each solution is unique and custom-made to meet your needs.',
         'security-tokens': 'Secure tokens',
         'security-roles': 'Differentiated roles',
         'security-encryption': 'Data encryption',
@@ -661,7 +687,7 @@ const translations = {
         'dark': 'Escuro',
         'light': 'Claro',
         'inicio': 'Início',
-        'how-we-work': 'Como trabalhamos',
+        'what-we-do': 'O que fazemos',
         'portfolio': 'Portfólio',
         'art': 'Arte',
         'web-pages': 'Páginas',
@@ -671,7 +697,7 @@ const translations = {
         'open-source': 'Código aberto',
         'custom-made': 'Feito sob medida',
         'scalability': 'Escalável',
-        'how-we-work-description': 'Combinamos o melhor do low-code e high-code para construir plataformas sólidas, escaláveis, seguras e visualmente atraentes, prontas para crescer com sua organização.<br><br>Priorizamos tecnologias e ferramentas de código aberto, porque acreditamos na transparência, estabilidade e autonomia tecnológica a longo prazo.<br><br>A experiência do usuário é prioridade.<br>Cada solução é única e feita sob medida para atender suas necessidades.',
+        'what-we-do-description': 'Combinamos o melhor do low-code e high-code para construir plataformas sólidas, escaláveis, seguras e visualmente atraentes, prontas para crescer com seu projeto.<br><br>Priorizamos tecnologias e ferramentas de código aberto, porque acreditamos na transparência, estabilidade e autonomia tecnológica a longo prazo.<br><br>A experiência do usuário é prioridade.<br>Cada solução é única e feita sob medida para atender suas necessidades.',
         'security-tokens': 'Tokens seguros',
         'security-roles': 'Funções diferenciadas',
         'security-encryption': 'Criptografia de dados',
@@ -684,14 +710,14 @@ const translations = {
         'scalability-nature': 'Escalável por natureza',
         'scalability-architecture': 'Flexibilidade de arquitetura',
         'scalability-schemas': 'Schemas inteligentes',
-        'cta-button': 'Quería saber mais',
+        'cta-button': 'Quiero saber mais',
         'copyright': '© 2025 Mondo. Todos os direitos reservados.'
     },
     fr: {
         'dark': 'Sombre',
         'light': 'Clair',
         'inicio': 'Accueil',
-        'how-we-work': 'Comment nous travaillons',
+        'what-we-do': 'Que faisons-nous',
         'portfolio': 'Portfolio',
         'art': 'Art',
         'web-pages': 'Pages web',
@@ -701,7 +727,7 @@ const translations = {
         'open-source': 'Open-source',
         'custom-made': 'Sur mesure',
         'scalability': 'Évolutive',
-        'how-we-work-description': 'Nous combinons le meilleur du low-code et du high-code pour construire des plateformes solides, évolutives, sécurisées et visuellement attrayantes, prêtes à grandir avec votre organisation.<br><br>Nous privilégions les technologies et outils open-source, car nous croyons en la transparence, la stabilité et l\'autonomie technologique à long terme.<br><br>L\'expérience utilisateur est une priorité.<br>Chaque solution est unique et sur mesure pour répondre à vos besoins.',
+        'what-we-do-description': 'Nous combinons le meilleur du low-code et du high-code pour construire des plateformes solides, évolutives, sécurisées et visuellement attrayantes, prêtes à grandir avec votre projet.<br><br>Nous privilégions les technologies et outils open-source, car nous croyons en la transparence, la stabilité et l\'autonomie technologique à long terme.<br><br>L\'expérience utilisateur est une priorité.<br>Chaque solution est unique et sur mesure pour répondre à vos besoins.',
         'security-tokens': 'Jetons sécurisés',
         'security-roles': 'Rôles différenciés',
         'security-encryption': 'Chiffrement des données',
@@ -723,7 +749,7 @@ const translations = {
         'dark': 'ダーク',
         'light': 'ライト',
         'inicio': 'ホーム',
-        'how-we-work': 'どのように働きますか',
+        'what-we-do': '私たちは何をしますか',
         'portfolio': 'ポートフォリオ',
         'art': '芸術',
         'web-pages': 'ウェブページ',
@@ -734,7 +760,7 @@ const translations = {
         'open-source': 'オープンソース',
         'custom-made': '特注',
         'scalability': 'スケーラブル',
-        'how-we-work-description': 'ローコードとハイコードの最良の部分を組み合わせて、組織とともに成長できる堅牢でスケーラブルで安全で視覚的に魅力的なプラットフォームを構築します。<br><br>透明性、安定性、長期的な技術的自律性を信じているため、オープンソースの技術とツールを優先します。<br><br>ユーザーエクスペリエンスが優先事項です。<br>各ソリューションはユニークでニーズに合わせてカスタムメイドされています。',
+        'what-we-do-description': 'ローコードとハイコードの最良の部分を組み合わせて、プロジェクトとともに成長できる堅牢でスケーラブルで安全で視覚的に魅力的なプラットフォームを構築します。<br><br>透明性、安定性、長期的な技術的自律性を信じているため、オープンソースの技術とツールを優先します。<br><br>ユーザーエクスペリエンスが優先事項です。<br>各ソリューションはユニークでニーズに合わせてカスタムメイドされています。',
         'security-tokens': '安全なトークン',
         'security-roles': '差別化された役割',
         'security-encryption': 'データ暗号化',
@@ -823,6 +849,17 @@ function translatePage(language) {
     html.setAttribute('lang', savedLanguage);
     translatePage(savedLanguage);
 
+    // Prevent scroll jump when clicking the dropdown
+    languageSwitcher.addEventListener('mousedown', function (e) {
+        const scrollY = window.scrollY;
+        const scrollX = window.scrollX;
+
+        // Restore scroll position after browser tries to scroll
+        setTimeout(() => {
+            window.scrollTo(scrollX, scrollY);
+        }, 0);
+    });
+
     // Handle language change
     languageSwitcher.addEventListener('change', function () {
         const selectedLanguage = this.value;
@@ -837,7 +874,21 @@ function translatePage(language) {
 // Import Web Pages Controller
 import './webPages.js';
 
-// Modal functionality
+// Custom notification function
+function showNotification(message, type = 'success') {
+    const notification = document.getElementById('notification');
+    const messageEl = notification.querySelector('.notification-message');
+
+    messageEl.textContent = message;
+    notification.className = `notification active ${type}`;
+
+    // Auto-hide after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('active');
+    }, 3000);
+}
+
+// Modal and form handling
 (function () {
     const ctaButton = document.getElementById('cta-button');
     const modal = document.getElementById('contact-modal');
@@ -869,5 +920,60 @@ import './webPages.js';
                 modal.classList.remove('active');
             }
         });
+
+        // Handle form submission
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Get form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    organization: document.getElementById('organization').value || null,
+                    email: document.getElementById('email').value,
+                    subject: document.getElementById('subject').value || null,
+                    message: document.getElementById('message').value || null,
+                    sendCopy: document.getElementById('copy').checked
+                };
+
+                // Disable submit button during submission
+                const submitButton = contactForm.querySelector('.submit-button');
+                const originalText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.textContent = 'Enviando...';
+
+                try {
+                    const response = await fetch('http://localhost:5001/api/contact', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    console.log('Response status:', response.status);
+                    console.log('Response OK:', response.ok);
+
+                    if (response.ok) {
+                        // Success - reset form and close modal
+                        contactForm.reset();
+                        modal.classList.remove('active');
+                        showNotification('¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.', 'success');
+                    } else {
+                        const errorText = await response.text();
+                        console.error('Error response:', errorText);
+                        throw new Error(`Error ${response.status}: ${errorText}`);
+                    }
+                } catch (error) {
+                    console.error('Full error:', error);
+                    showNotification('Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.', 'error');
+                } finally {
+                    // Re-enable submit button
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            });
+        }
     }
 })();
