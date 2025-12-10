@@ -8,38 +8,44 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.scss">
 </head>
 
 <body>
     <div id="dither-background"></div>
     <header>
-        <!-- React Hero Section -->
-        <h1 data-i18n="title" id="react-hero" style="height: 80px; width: 100%; position: relative; overflow: hidden">
-        </h1>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#what-we-do" data-i18n="what-we-do">What we do</a></li>
-                <li><a href="#portfolio" data-i18n="portfolio">Portfolio</a></li>
-                <li><a href="#art" data-i18n="art" style="margin-right: 2rem;">Art</a></li>
-            </ul>
-        </nav>
-        <div class="header-controls">
-            <select class="language-switcher" id="languageSwitcher" aria-label="Select language">
-                <option value="spa">ES</option>
-                <option value="eng">EN</option>
-                <option value="pt">PT</option>
-                <option value="fr">FR</option>
-                <option value="jap">JP</option>
-            </select>
-            <!-- CSS Theme Toggle -->
-            <label class="theme-switch" aria-label="Toggle theme">
-                <input type="checkbox" id="themeToggleCheckbox">
-                <div class="slider round">
-                    <span class="icon-sun">🔆</span>
-                    <span class="icon-moon">🌙</span>
-                </div>
-            </label>
+        <h1 data-i18n="title" id="header-logo" class="header-logo">mondo</h1>
+        <div class="header-right">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#what-we-do" data-i18n="what-we-do">What we do</a></li>
+                    <li><a href="#portfolio" data-i18n="portfolio">Portfolio</a></li>
+                    <li><a href="#art" data-i18n="art">Art</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <select class="language-switcher" id="languageSwitcher" aria-label="Select language">
+                    <option value="spa">ES</option>
+                    <option value="eng">EN</option>
+                    <option value="pt">PT</option>
+                    <option value="fr">FR</option>
+                    <option value="jap">JP</option>
+                </select>
+                <!-- CSS Theme Toggle -->
+                <label class="theme-switch" aria-label="Toggle theme">
+                    <input type="checkbox" id="themeToggleCheckbox">
+                    <div class="slider round">
+                        <span class="icon-sun">🔆</span>
+                        <span class="icon-moon">🌙</span>
+                    </div>
+                </label>
+            </div>
+            <button class="burger-menu" id="burgerMenu" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 

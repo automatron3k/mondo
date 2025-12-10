@@ -61,6 +61,7 @@ $content-max-width: 1200px;
     --button-bg: #000;
     --pill-bg: rgba(139, 135, 135, 0.7);
     --modal-bg: rgba(139, 135, 135, 0.7);
+    --header-height: 80px;
     /* Added button background color */
 }
 
@@ -504,6 +505,7 @@ footer {
 
     @include media-down($breakpoint-mobile) {
         font-size: 2.5rem;
+        text-align: center;
     }
 }
 

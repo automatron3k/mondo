@@ -1,4 +1,4 @@
-## mondo
+# mondo
 
 > Como este mundo, pero más redondo
 

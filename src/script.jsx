@@ -7,11 +7,11 @@ import DitherBackground from './DitherBackground.jsx';
 import DecryptedText from './ScrambleText';
 
 const taglineData = {
-    spa: { prefix: 'Desarrollo web:', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
-    eng: { prefix: 'Web development:', words: ['social', 'open-source', 'cultural', 'human', 'low-code', 'full-stack'] },
-    pt: { prefix: 'Desenvolvimento web:', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
-    fr: { prefix: 'Développement web:', words: ['social', 'open-source', 'culturel', 'humain', 'low-code', 'full-stack'] },
-    jap: { prefix: 'ウェブ開発：', words: ['社会的', 'オープンソース', '文化的', '人間的', 'ローコード', 'フルスタック'] }
+    spa: { prefix: 'Desarrollo web: ', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
+    eng: { prefix: 'Web development: ', words: ['social', 'open-source', 'cultural', 'human', 'low-code', 'full-stack'] },
+    pt: { prefix: 'Desenvolvimento web: ', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
+    fr: { prefix: 'Développement web: ', words: ['social', 'open-source', 'culturel', 'humain', 'low-code', 'full-stack'] },
+    jap: { prefix: 'ウェブ開発: ', words: ['社会的', 'オープンソース', '文化的', '人間的', 'ローコード', 'フルスタック'] }
 };
 
 function Tagline() {
