@@ -412,6 +412,7 @@ footer {
 
 /* Language Switcher */
 .language-switcher {
+    font-family: inherit; // Fix for dropdown font mismatch
     background-color: transparent;
     color: var(--text-color);
     border: none;
@@ -874,7 +875,26 @@ section {
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
+
+    // Layout for icon + text
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    transition: all 0.4s cubic-bezier(0.2, 0.1, 0.1, 0.1);
+
+    .cta-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        stroke: currentColor;
+        stroke-width: 7px;
+    }
+
+    span {
+        display: inline-block;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
 
     &:hover {
         transform: translateX(-50%) translateY(-3px);
@@ -883,6 +903,34 @@ section {
 
     &:active {
         transform: translateX(-50%) translateY(-1px);
+    }
+
+    // Scrolled state (Morphed to corner)
+    &.scrolled {
+        left: calc(100% - 4rem);
+        transform: translateX(-50%);
+        padding: 1rem;
+        border-radius: 50%;
+        gap: 0;
+
+        span {
+            width: 0;
+            opacity: 0;
+            transform: scale(0);
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        &:hover {
+            transform: translateX(-50%) translateY(-3px) scale(1.1);
+        }
+    }
+
+    // Hidden state when modal is open
+    &.modal-active {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(-50%) translateY(20px); // Slight slide down as it fades
     }
 }
 
@@ -1111,5 +1159,104 @@ section {
         font-size: 1rem;
         font-weight: 500;
         display: block;
+    }
+}
+
+/* =========================================
+   Portfolio Carousel Styling
+   ========================================= */
+
+#portfolio-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 0; // We use width on the cards to control spacing
+    padding: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height)); // Full height minus header
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        display: none; // Keeps the focus on the content
+    }
+}
+
+.portfolio-card {
+    flex: 0 0 100vw; // One card per "view"
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: transparent; // Invisible card background
+    border: none; // No card border
+    box-shadow: none; // No shadow
+    transform: none; // Reset any potential transform
+    border-radius: 0;
+
+    &:hover {
+        transform: none !important; // Absolute stop to the "lifting"
+        box-shadow: none !important;
+    }
+
+    .card-content {
+        max-width: 800px;
+        width: 100%;
+
+        .client-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-size: clamp(2rem, 8vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+
+            a {
+                color: var(--text-color);
+                text-decoration: none;
+                transition: opacity 0.3s ease;
+
+                &:hover {
+                    opacity: 0.6;
+                }
+            }
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .metadata-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            .pill {
+                background-color: var(--pill-bg);
+                color: var(--text-color);
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                text-transform: capitalize;
+                backdrop-filter: blur(5px); // Matches your modal-bg style
+                border: 1px solid var(--border-color);
+            }
+
+            .tech-pill {
+                font-weight: bold;
+                background-color: transparent;
+                border: 1px solid var(--text-color);
+            }
+        }
     }
 }

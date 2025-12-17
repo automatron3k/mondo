@@ -12,6 +12,9 @@ router.get('/', async (req, res) => {
             SELECT 
                 id,
                 title,
+                client,
+                year,
+                status,
                 text as description,
                 thumbnail as image_url,
                 project_url as url,

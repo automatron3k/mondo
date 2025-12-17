@@ -250,8 +250,15 @@ function translatePage(language) {
             return;
         }
         if (translations[language] && translations[language][key]) {
-            // Use innerHTML for elements that may contain HTML tags (like <br>)
-            element.innerHTML = translations[language][key];
+            // Special handling for CTA button to preserve icon
+            if (element.id === 'cta-button') {
+                const textSpan = element.querySelector('span');
+                if (textSpan) {
+                    textSpan.innerHTML = translations[language][key];
+                }
+            } else {
+                element.innerHTML = translations[language][key];
+            }
         }
     });
 
@@ -341,7 +348,7 @@ function translatePage(language) {
 
     function toggleMenu() {
         const isActive = burgerMenu.classList.contains('active');
-        
+
         if (isActive) {
             // Close menu
             burgerMenu.classList.remove('active');
@@ -366,10 +373,10 @@ function translatePage(language) {
 
     if (burgerMenu && mainNav) {
         burgerMenu.addEventListener('click', toggleMenu);
-        
+
         // Close menu when clicking overlay
         overlay.addEventListener('click', closeMenu);
-        
+
         // Close menu when clicking a nav link
         const navLinks = mainNav.querySelectorAll('a');
         navLinks.forEach(link => {
@@ -451,16 +458,30 @@ function showNotification(message, type = 'success') {
     const modal = document.getElementById('contact-modal');
     const closeButton = document.querySelector('.modal-close');
 
-    if (ctaButton && modal) {
-        // Open modal
+    if (ctaButton) {
         ctaButton.addEventListener('click', () => {
-            modal.classList.add('active');
+            if (modal) { // Ensure modal exists before trying to open it
+                modal.classList.add('active');
+                ctaButton.classList.add('modal-active'); // Hide CTA
+            }
         });
 
+        // Scroll listener for morphing effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                ctaButton.classList.add('scrolled');
+            } else {
+                ctaButton.classList.remove('scrolled');
+            }
+        });
+    }
+
+    if (modal) { // Only proceed with modal-specific logic if modal exists
         // Close modal on X button
         if (closeButton) {
             closeButton.addEventListener('click', () => {
                 modal.classList.remove('active');
+                if (ctaButton) ctaButton.classList.remove('modal-active'); // Show CTA
             });
         }
 
@@ -468,6 +489,7 @@ function showNotification(message, type = 'success') {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.classList.remove('active');
+                if (ctaButton) ctaButton.classList.remove('modal-active'); // Show CTA
             }
         });
 
@@ -516,6 +538,7 @@ function showNotification(message, type = 'success') {
                         // Success - reset form and close modal
                         contactForm.reset();
                         modal.classList.remove('active');
+                        if (ctaButton) ctaButton.classList.remove('modal-active'); // Show CTA
                         showNotification('¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.', 'success');
                     } else {
                         const errorText = await response.text();
@@ -532,5 +555,43 @@ function showNotification(message, type = 'success') {
                 }
             });
         }
+    }
+})();
+
+(async function () {
+    try {
+        const container = document.getElementById('portfolio-container');
+        if (!container) return;
+
+        const response = await fetch('http://localhost:5001/api/portfolio');
+        const data = await response.json();
+
+        container.innerHTML = data.map(project => `
+            <article class="portfolio-card">
+                <div class="card-content">
+                    <h1 class="client-label">${project.client || 'Personal Project'}</h1>
+                    
+                    <h2 class="project-title">
+                        <a href="${project['project-url'] || '#'}" target="_blank">
+                            ${project.title}
+                        </a>
+                    </h2>
+
+                    <p class="project-description">${project.description || ''}</p>
+
+                    <div class="metadata-row">
+                        <span class="pill">${project.category}</span>
+                        <span class="pill">${project.year}</span>
+                        ${project.technologies ?
+                (Array.isArray(project.technologies) ? project.technologies : project.technologies.split(','))
+                    .map(tech => `<span class="pill tech-pill">${tech.trim()}</span>`).join('')
+                : ''
+            }
+                    </div>
+                </div>
+            </article>
+        `).join('');
+    } catch (err) {
+        console.warn("Portfolio load failed:", err);
     }
 })();

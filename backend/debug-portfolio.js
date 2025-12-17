@@ -21,14 +21,7 @@ async function testQuery() {
         console.log(`\nQuerying for category: '${category}'...`);
 
         const result = await query(`
-            SELECT 
-                id,
-                title,
-                text as description,
-                thumbnail as image_url,
-                project_url as url,
-                category,
-                technologies
+            SELECT *
             FROM portfolio
             WHERE category = $1
             ORDER BY created_at DESC
