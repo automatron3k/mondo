@@ -7,17 +7,17 @@ import DitherBackground from './DitherBackground.jsx';
 import DecryptedText from './ScrambleText';
 
 const taglineData = {
-    spa: { prefix: 'Desarrollo web: ', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
-    eng: { prefix: 'Web development: ', words: ['social', 'open-source', 'cultural', 'human', 'low-code', 'full-stack'] },
+    es: { prefix: 'Desarrollo web: ', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
+    en: { prefix: 'Web development: ', words: ['social', 'open-source', 'cultural', 'human', 'low-code', 'full-stack'] },
     pt: { prefix: 'Desenvolvimento web: ', words: ['social', 'open-source', 'cultural', 'humano', 'low-code', 'full-stack'] },
     fr: { prefix: 'Développement web: ', words: ['social', 'open-source', 'culturel', 'humain', 'low-code', 'full-stack'] },
-    jap: { prefix: 'ウェブ開発: ', words: ['社会的', 'オープンソース', '文化的', '人間的', 'ローコード', 'フルスタック'] }
+    jp: { prefix: 'ウェブ開発: ', words: ['社会的', 'オープンソース', '文化的', '人間的', 'ローコード', 'フルスタック'] }
 };
 
 function Tagline() {
-    const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('language') || 'spa');
+    const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('language') || 'en');
     // Sanitize language: if unknown, fallback to 'spa' to avoid crashes
-    const safeLang = taglineData[currentLanguage] ? currentLanguage : 'spa';
+    const safeLang = taglineData[currentLanguage] ? currentLanguage : 'en';
 
     const [index, setIndex] = useState(0);
 
@@ -69,14 +69,14 @@ if (ditherRoot) {
     createRoot(ditherRoot).render(
         <DitherBackground
             waveColor={[0.5, 0.5, 0.5]}
-            pixelSize={4.0}
+            pixelSize={5.0}
         />
     );
 }
 
 // Translations object
 const translations = {
-    spa: {
+    es: {
         'dark': 'Oscuro',
         'light': 'Claro',
         'inicio': 'Inicio',
@@ -107,7 +107,7 @@ const translations = {
         'cta-button': 'Quiero saber más',
         'copyright': '© 2025 Mondo. Todos los derechos reservados.'
     },
-    eng: {
+    en: {
         'dark': 'Dark',
         'light': 'Light',
         'inicio': 'Home',
@@ -201,7 +201,7 @@ const translations = {
         'modal-description': 'Remplissez le formulaire et nous vous contacterons.',
         'copyright': '© 2025 Mondo. Tous droits réservés.'
     },
-    jap: {
+    jp: {
         'dark': 'ダーク',
         'light': 'ライト',
         'inicio': 'ホーム',
@@ -235,6 +235,34 @@ const translations = {
         'copyright': '© 2025 Mondo. 全著作権所有。'
     }
 };
+
+/**
+ * Detecta el idioma del usuario y aplica las traducciones
+ */
+function autoDetectLanguage() {
+    // 1. Prioridad: Idioma guardado manualmente antes (si el usuario ya eligió uno)
+    const savedLang = localStorage.getItem('userSelectedLang');
+    
+    // 2. Segunda opción: Idioma del navegador (ej: "es-ES" -> "es")
+    const browserLang = (navigator.language || navigator.userLanguage).split('-')[0];
+    
+    // 3. Verificar si el idioma detectado existe en tu objeto translations
+    const availableLanguages = Object.keys(translations);
+    
+    let langToApply = 'en'; // Default por defecto
+
+    if (savedLang && availableLanguages.includes(savedLang)) {
+        langToApply = savedLang;
+    } else if (availableLanguages.includes(browserLang)) {
+        langToApply = browserLang;
+    }
+
+    // 4. Ejecutar tu función de traducción
+    translatePage(langToApply);
+}
+
+// Ejecutar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', autoDetectLanguage);
 
 // Shared translate function
 function translatePage(language) {
@@ -270,6 +298,8 @@ function translatePage(language) {
             themeText.textContent = translations[language]['dark'];
         }
     }
+    localStorage.setItem('userSelectedLang', language);
+    document.documentElement.lang = language; // Buena práctica para SEO y accesibilidad
 }
 
 // Theme toggle functionality (run first to set theme attribute)
@@ -305,7 +335,7 @@ function translatePage(language) {
     const html = document.documentElement;
 
     // Get saved language preference or default to Spanish
-    const savedLanguage = localStorage.getItem('language') || 'eng';
+    const savedLanguage = localStorage.getItem('language') || 'en';
 
     // Apply saved language on page load
     languageSwitcher.value = savedLanguage;

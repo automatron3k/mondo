@@ -7,7 +7,7 @@ import apiClient from './api.js';
 class WebPagesManager {
     constructor() {
         this.items = [];
-        this.currentLanguage = localStorage.getItem('language') || 'spa';
+        this.currentLanguage = localStorage.getItem('language') || 'en';
     }
 
     /**

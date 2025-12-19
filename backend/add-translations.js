@@ -13,17 +13,17 @@ dotenv.config();
 
 // Example translations for the sample posts
 const translations = {
-    spa: [
+    es: [
         {
             post_id: 1,
-            language: 'spa',
+            language: 'es',
             title: 'Bienvenido a Mondo',
             content: 'Mondo es una plataforma para desarrollo web social, cultural y gentil. Creemos en crear experiencias web que sean accesibles, hermosas y significativas.',
             excerpt: 'Descubre qué hace especial a Mondo y cómo abordamos el desarrollo web.'
         },
         {
             post_id: 2,
-            language: 'spa',
+            language: 'es',
             title: 'Comenzando con Mondo',
             content: 'Esta es una guía para ayudarte a comenzar con Mondo. Cubriremos los conceptos básicos y te ayudaremos a entender nuestra filosofía.',
             excerpt: 'Aprende los conceptos básicos de usar Mondo para tus proyectos web.'
@@ -61,17 +61,17 @@ const translations = {
             excerpt: 'Apprenez les bases de l\'utilisation de Mondo pour vos projets web.'
         }
     ],
-    jap: [
+    jp: [
         {
             post_id: 1,
-            language: 'jap',
+            language: 'jp',
             title: 'Mondoへようこそ',
             content: 'Mondoは、社会的、文化的、優しいウェブ開発のためのプラットフォームです。私たちは、アクセス可能で美しく、意味のあるウェブ体験を作り出すことを信じています。',
             excerpt: 'Mondoを特別なものにしているものと、私たちがウェブ開発にどのように取り組んでいるかを発見してください。'
         },
         {
             post_id: 2,
-            language: 'jap',
+            language: 'jp',
             title: 'Mondoの始め方',
             content: 'これは、Mondoを始めるのに役立つガイドです。基本をカバーし、私たちの哲学を理解するのを助けます。',
             excerpt: 'WebプロジェクトでMondoを使用する基本を学びます。'

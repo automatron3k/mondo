@@ -17,11 +17,11 @@ async function translateText(text, targetLang, sourceLang = 'en') {
     if (!text || !text.trim()) return text;
     
     const langMap = {
-        'spa': 'es',
-        'eng': 'en',
+        'es': 'es',
+        'en': 'en',
         'pt': 'pt',
         'fr': 'fr',
-        'jap': 'ja'
+        'jp': 'jp'
     };
     
     const targetCode = langMap[targetLang] || 'en';
@@ -68,7 +68,7 @@ async function translatePosts() {
             return;
         }
         
-        const languages = ['spa', 'pt', 'fr', 'jap'];
+        const languages = ['es', 'en', 'pt', 'fr', 'jp'];
         
         for (const post of posts) {
             console.log(`\n📝 Translating post: "${post.title}"`);

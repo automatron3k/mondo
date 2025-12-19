@@ -17,7 +17,7 @@ class ApiClient {
      * Get current language from localStorage
      */
     getCurrentLanguage() {
-        return localStorage.getItem('language') || 'spa';
+        return localStorage.getItem('language') || 'en';
     }
 
     /**
